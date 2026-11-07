@@ -28,8 +28,6 @@ python tools/summarize_bench.py results/same.csv results/mild.csv results/large.
 
 이 수치를 읽을 때 알아둘 점입니다.
 
-- **순수 시험셋 결과가 아닙니다.** 평가 슬롯의 실패를 분석해 라벨과 `plan_server.py`의 후보 선택을 고쳤습니다.
-- **학습 시드 1개의 결과입니다.** 시드 간 편차는 재지 않았습니다.
 - **DDP 평가기와 남은 차이가 있습니다.** Windows DX 렌더를 썼고(`-opengl`은 Windows에서 크래시), 재계획 주기와 pure pursuit 추적기는 방법의 일부로 DDP와 다릅니다.
 - 평가 슬롯은 학습에서 대부분 제외된 슬롯입니다. 800개 학습 궤적 중 20개만 이 슬롯에 있습니다.
 
