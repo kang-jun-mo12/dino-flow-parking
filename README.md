@@ -75,7 +75,20 @@ CarlaUE4.exe -quality-level=Epic -windowed -ResX=640 -ResY=360
 python scripts/structure_flow/plan_server.py weights/sq30b_s1.pt
 ```
 
-**4. 평가를 돌립니다.** (Python 3.7) `CARLA_EGG`에 0.9.11 egg 경로를 넣습니다. 날씨는 `same`, `mild`, `large`입니다.
+**4. 평가를 돌립니다.** (Python 3.7) `CARLA_EGG`에 0.9.11 egg 경로를 넣습니다. 날씨는 `same`, `mild`, `large`입니다. `requirements.txt`는 플래너용입니다. 평가 쪽 Python 3.7에는 아래 두 패키지만 설치합니다. `setuptools`는 egg를 여는 데 필요합니다.
+
+```bash
+python -m pip install numpy setuptools
+```
+
+PowerShell:
+
+```powershell
+$env:CARLA_EGG = "path\to\carla-0.9.11-py3.7-win-amd64.egg"
+python scripts/structure_flow/benchmark.py --out bench/same --weather same --epochs 4
+```
+
+Git Bash:
 
 ```bash
 CARLA_EGG=path/to/carla-0.9.11-py3.7-win-amd64.egg python scripts/structure_flow/benchmark.py --out bench/same --weather same --epochs 4

@@ -8,7 +8,7 @@ goal y-8..+8, seed 66 plus the slot number for the parked cars, 30 Hz, a 1 s hol
 limit, out of bounds for 10 s, success after two stopped reverse frames in the goal, and
 the three weathers. The frame order is the one of game_loop: the agent acts on the sensor
 frame of the previous tick. The target is the one the DDP agent makes, with the position
-dead reckoned at 10 Hz from velocity and IMU and a goal yaw of 180 for every slot.
+dead reckoned at 10 Hz from velocity and IMU, and a goal yaw of 180 in row 2 and 0 in row 3.
 """
 from __future__ import print_function
 import argparse
