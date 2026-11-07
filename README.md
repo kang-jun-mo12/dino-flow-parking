@@ -53,6 +53,8 @@ python tools/summarize_bench.py results/same.csv results/mild.csv results/large.
 
 CARLA 클라이언트 egg가 Python 3.7 전용이라 프로세스 두 개로 나뉩니다.
 
+서버와 `CARLA_EGG`는 모두 CARLA 0.9.11이어야 합니다. egg 파일이 없거나 버전이 다르면 `benchmark.py`가 시작하지 않습니다. 위 결과는 Windows의 DX 렌더로 잰 값이라, 다른 OS나 GPU에서는 약간 다를 수 있습니다.
+
 **1. 앞단 가중치를 받습니다.** 434 MB라 git이 아니라 [Release](https://github.com/kang-jun-mo12/dino-flow-parking/releases/tag/v1.0)에 있습니다.
 
 ```bash

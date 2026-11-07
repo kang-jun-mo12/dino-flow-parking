@@ -24,8 +24,13 @@ import time
 import numpy as np
 
 EGG = os.environ.get('CARLA_EGG', 'carla-0.9.11-py3.7-win-amd64.egg')
+if not os.path.isfile(EGG):
+    # A missing egg would otherwise fall through to any carla package pip installed.
+    sys.exit('CARLA_EGG must point to the CARLA 0.9.11 egg, no such file: {}'.format(EGG))
 sys.path.insert(0, EGG)
 import carla
+
+CARLA_VERSION = '0.9.11'
 
 CAMERAS = ('camera_front', 'camera_front_left', 'camera_front_right',
            'camera_back', 'camera_back_left', 'camera_back_right')
@@ -140,6 +145,9 @@ class Bench:
         self.args = args
         self.client = carla.Client('127.0.0.1', args.port)
         self.client.set_timeout(60.)
+        versions = self.client.get_client_version(), self.client.get_server_version()
+        if versions != (CARLA_VERSION, CARLA_VERSION):
+            sys.exit('The benchmark needs CARLA {}, found client {} and server {}'.format(CARLA_VERSION, *versions))
         self.world = self.client.load_world(args.map)
         # The map bakes in parked cars, two of them inside goal slots 2-7 and 3-3.
         self.world.unload_map_layer(carla.MapLayer.ParkedVehicles)
