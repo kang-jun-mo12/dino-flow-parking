@@ -53,11 +53,13 @@ python tools/summarize_bench.py results/same.csv results/mild.csv results/large.
 
 CARLA 클라이언트 egg가 Python 3.7 전용이라 프로세스 두 개로 나뉩니다.
 
-**1. 앞단 가중치를 만듭니다.** 434 MB라 저장소에 넣지 않았습니다. [Hugging Face](https://huggingface.co/ChampagneAndfragrance/Dino_Diffusion_Parking)에서 `last.ckpt`를 받아 변환합니다.
+**1. 앞단 가중치를 받습니다.** 434 MB라 git이 아니라 [Release](https://github.com/kang-jun-mo12/dino-flow-parking/releases/tag/v1.0)에 있습니다.
 
 ```bash
-python tools/export_ddp_frontend.py path/to/last.ckpt
+curl -L -o weights/ddp_frontend.pt https://github.com/kang-jun-mo12/dino-flow-parking/releases/download/v1.0/ddp_frontend.pt
 ```
+
+SHA-256은 `556bab3150757fe01c11f2d4cf0030183620727f545a1c2386cbfcc4738dfdd5`입니다. [Hugging Face](https://huggingface.co/ChampagneAndfragrance/Dino_Diffusion_Parking)의 `last.ckpt`에서 `python tools/export_ddp_frontend.py path/to/last.ckpt`로 직접 만들어도 같은 텐서가 나옵니다.
 
 **2. CARLA 0.9.11 서버를 켭니다.**
 
@@ -101,6 +103,6 @@ python scripts/structure_flow/train.py --pack runs/pack_sq30b --out runs/sq30b_s
 
 이 저장소에는 아직 라이선스를 지정하지 않았습니다.
 
-- **DDP:** 앞단 구조와 `benchmark.py`의 평가 프로토콜은 Dino-Diffusion Parking 공개 코드([`ChampagneAndfragrance/Anonomous_DDP`](https://github.com/ChampagneAndfragrance/Anonomous_DDP))를 따릅니다. 이 코드 저장소에는 라이선스 파일이 없으므로 외부 공개 전에 저자 확인이 필요합니다. 앞단 가중치의 원본은 MIT로 표시된 Hugging Face 모델입니다.
-- **DINOv2:** 앞단의 백본입니다.
+- **DDP:** 앞단 구조와 `benchmark.py`의 평가 프로토콜은 Dino-Diffusion Parking 공개 코드([`ChampagneAndfragrance/Anonomous_DDP`](https://github.com/ChampagneAndfragrance/Anonomous_DDP))를 따릅니다. 이 코드 저장소에는 라이선스 파일이 없으므로 외부 공개 전에 저자 확인이 필요합니다. Release의 `ddp_frontend.pt`는 MIT로 표시된 Hugging Face 모델 `ChampagneAndfragrance/Dino_Diffusion_Parking`의 `last.ckpt`에서 인식 모듈만 뽑은 것이고, 학습은 저자들이 했습니다.
+- **DINOv2:** 앞단의 백본이며 `ddp_frontend.pt`에 가중치가 포함됩니다. Apache-2.0입니다([`facebookresearch/dinov2`](https://github.com/facebookresearch/dinov2)).
 - **CAA-Policy:** 카메라 리그 설정의 출처입니다([`ai4ce/CAAPolicy`](https://github.com/ai4ce/CAAPolicy)).
