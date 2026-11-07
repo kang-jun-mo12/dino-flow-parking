@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+
+# Too large for git, rebuilt with tools/export_ddp_frontend.py
+weights/ddp_frontend.pt
+weights/last.ckpt
+
+# Data and run outputs
+data/
+runs/
+bench/

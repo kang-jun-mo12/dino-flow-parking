@@ -1,0 +1,6 @@
+# Planner process (Python 3.11, CUDA). Tested with torch 2.11.0+cu128.
+torch
+torchvision
+numpy
+scipy
+pillow
