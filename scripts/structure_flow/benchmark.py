@@ -50,6 +50,7 @@ HOLD_FRAMES, TOTAL_FRAMES, OUT_FRAMES, NEAR_FRAMES, IN_GOAL_FRAMES = 30, 30*FPS,
 X_TOL, Y_TOL, YAW_TOL = 1., .6, 10.
 SPOT_Z = .3
 PROCESS_FRAMES, TRACK_DT = 3, .1    # the agent reads its sensors at 10 Hz
+TICK_SECONDS = 120.     # wait per world tick; the 10 s default is too short for OpenGL servers under WSL
 VELOCITY_POINT = .335       # metres ahead of the actor origin, fitted on 54 Same episodes
 # cloudiness, sun azimuth, sun altitude, fog, wetness, precipitation, deposits
 WEATHERS = dict(same=(15., 0., 75., 0., 0., 0., 0.), mild=(35., 20., 25., 2., 20., 30., 20.),
@@ -284,7 +285,7 @@ class Bench:
         next_plan, outcome, step, total = HOLD_FRAMES, None, -1, 0
         self.other, self.motion = None, []
         while outcome is None:
-            frame = self.world.tick()
+            frame = self.world.tick(TICK_SECONDS)
             step += 1
             if step < HOLD_FRAMES:
                 self.ego.apply_control(carla.VehicleControl())
